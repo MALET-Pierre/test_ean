@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Copyright (c) SUPPLiot GmbH.
+
+    This file is part of SUPPLiot GS1 SSCC Labels module
+    (see https://suppliot.eu).
+
+    See LICENSE file for full copyright and licensing details.
+-->
+<odoo>
+    <data>
+        <record id="suppl_product_template_only_form_view_barcode_button" model="ir.ui.view">
+            <field name="name">suppl.product.template.product.form.barcode.button</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_only_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='barcode']" position="after">
+                    <button attrs="{'invisible': [('product_variant_count', '>', 1)]}"
+                            name="create_barcode_number"
+                            string="Generate GTIN" type="object"
+                            class="oe_edit_only btn-secondary"></button>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="suppl_product_variant_easy_edit_view_inherit_barcode_via_smartbuttons" model="ir.ui.view">
+            <field name="name">suppl.product.product.view.form.easy.inherit.barcode.smartbuttons</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_variant_easy_edit_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='barcode']" position="after">
+                    <button name="create_barcode_number" string="Generate GTIN" type="object"
+                            class="oe_edit_only btn-secondary"></button>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="suppl_product_normal_form_view_inherit_barcode_via_menuitem" model="ir.ui.view">
+            <field name="name">suppl.product.product.form.inherit.barcode.menuitem</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_normal_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='barcode']" position="after">
+                    <button name="create_barcode_number" string="Generate GTIN" type="object"
+                            class="oe_edit_only btn-secondary"></button>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
