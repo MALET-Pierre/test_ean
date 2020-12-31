@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Copyright (c) SUPPLiot GmbH.
+
+    This file is part of SUPPLiot Better Barcoding module
+    (see https://suppliot.eu).
+
+    See LICENSE file for full copyright and licensing details.
+-->
+<templates xml:space="preserve">
+    <t t-extend="stock_barcode_lines_widget">
+        <t t-jquery=".o_barcode_control:first" t-operation="attributes">
+            <attribute name="t-if">widget.mode !== 'done' and widget.mode !== 'cancel' and (widget.bb_settings.show_add_product_btn || widget.bb_settings.show_packaging_btn)</attribute>
+        </t>
+
+        <t t-jquery="[class*=o_add_line]" t-operation="attributes">
+            <attribute name="t-if">widget.bb_settings.show_add_product_btn</attribute>
+        </t>
+
+        <t t-jquery="[class*= o_previous_page]" t-operation="attributes">
+             <attribute name="t-if">widget.groups.group_stock_multi_locations and widget.bb_settings.show_previous_next_btn</attribute>
+        </t>
+
+        <t t-jquery="[class*= o_next_page]" t-operation="attributes">
+             <attribute name="t-if">widget.groups.group_stock_multi_locations and widget.bb_settings.show_previous_next_btn</attribute>
+        </t>
+
+        <t t-jquery="[class*= o_put_in_pack]" t-operation="attributes">
+             <attribute name="t-if">widget.groups.group_tracking_lot and widget.model == 'stock.picking' and widget.bb_settings.show_packaging_btn</attribute>
+        </t>
+
+        <t t-jquery="[class*=o_validate_page]" t-operation="attributes">
+            <attribute name="t-if">widget.bb_settings.show_validate_btn</attribute>
+        </t>
+
+        <t t-jquery="[class*=o_validate_page]" t-operation="after">
+            <button t-if="widget.bb_settings.show_validateprint_btn"
+                    class="btn btn-secondary text-uppercase suppl_bb_validate_and_print"><i class="fa fa-check mr-1"/>
+                Validate and Print</button>
+        </t>
+        <t t-jquery="[class*= o_validate_page]" t-operation="before">
+            <button class="btn btn-secondary text-uppercase suppl_bb_save"><i class="fa fa-save mr-1"/>Save</button>
+        </t>
+    </t>
+
+    <t t-extend="stock_barcode_lines_template">
+        <t t-jquery=".o_barcode_line_details:first" t-operation="append">
+           <div class="o_line_scan_error_msg_wrapper">
+               <i class="fa fa-exclamation"/>
+               <span class="o_line_scan_error_msg"><t t-esc="line.error_msg"></t></span>
+           </div>
+        </t>
+
+        <t t-jquery=".o_line_lot_name:first" t-operation="replace">
+
+        </t>
+
+        <t t-jquery="[class*=o_line_lot_id]" t-operation="replace">
+             <span class="o_line_lot_id">
+                 <t t-esc="line.lot_display_text or ' --- '"></t>
+             </span>
+        </t>
+    </t>
+</templates>

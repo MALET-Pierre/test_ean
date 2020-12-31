@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Copyright (c) SUPPLiot GmbH.
+
+    This file is part of SUPPLiot Better Barcoding module
+    (see https://suppliot.eu).
+
+    See LICENSE file for full copyright and licensing details.
+-->
+<odoo>
+    <data>
+        <report
+            string="Operation type instructions (PDF)"
+            id="suppl_bb_action_report_picking_type_label"
+            model="stock.picking.type"
+            report_type="qweb-pdf"
+            name="suppl_better_barcoding.suppl_bb_report_picking_type_label"
+            file="suppl_better_barcoding.suppl_bb_report_picking_type_label"
+            print_report_name="'Operation-type instructions - %s' % object.name"
+        />
+    </data>
+</odoo>

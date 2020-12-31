@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Copyright (c) SUPPLiot GmbH.
+
+    This file is part of SUPPLiot Better Barcoding module
+    (see https://suppliot.eu).
+
+    See LICENSE file for full copyright and licensing details.
+-->
+<odoo>
+
+    <template id="suppl_bb_report_picking_type_label">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="operation_type">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <div style="margin-bottom: 1.5rem;" class="jumbotron jumbotron-fluid p-2">
+                            <div class="container">
+                                <h3>
+                                    <t t-esc="operation_type.user_friendly_name"/>
+                                </h3>
+                                <p class="blockquote-footer lead">
+                                    <t t-esc="operation_type.name"/>
+                                    /
+                                    <t t-esc="operation_type.barcode"/>
+                                </p>
+                                <hr class="my-1"></hr>
+                                <p class="m-0">
+                                    <t t-esc="operation_type.user_friendly_description"/>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="list-group">
+                            <t t-foreach="operation_type.user_friendly_steps" t-as="user_friendly_step">
+                                <div class="p-2 list-group-item list-group-item-action mb-2">
+                                    <div class="row">
+                                        <h6 class="col-10 m-0">
+                                            <t t-esc="user_friendly_step.step_short_description"/>
+                                        </h6>
+                                        <small class="col-2" style="text-align: right;">
+                                            <span style="mr-2">Step</span>
+                                            <t t-esc="user_friendly_step.sequence"/>
+                                        </small>
+                                    </div>
+                                    <div class="row" style="text-align: center;"
+                                         t-if="user_friendly_step.step_show_barcode">
+                                        <div class="col-12">
+                                            <img width="240" height="45"
+                                                 t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('Code128',  user_friendly_step.step_show_custom_barcode or operation_type.barcode, 600, 75)"
+                                                 alt="Barcode"/>
+                                        </div>
+                                    </div>
+                                    <div class="row"
+                                         style="text-align: center; font-size: 1.05rem;font-family: monospace;"
+                                         t-if="user_friendly_step.step_show_barcode">
+                                        <div class="col-12">
+                                            <t t-esc="user_friendly_step.step_show_custom_barcode or operation_type.barcode"/>
+                                        </div>
+                                    </div>
+
+                                    <p style="font-size: 0.85rem;" class="mt-2 mb-0"
+                                       t-if="user_friendly_step.step_description_details">
+                                        <t t-esc="user_friendly_step.step_description_details"/>
+                                    </p>
+                                </div>
+                            </t>
+                        </div>
+
+                        <div class="row" t-if="operation_type.user_friendly_notes">
+                            <div class="col-12">
+                                <p class="h5">Notes:</p>
+                                <p class="m-0">
+                                    <t t-esc="operation_type.user_friendly_notes"/>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>
