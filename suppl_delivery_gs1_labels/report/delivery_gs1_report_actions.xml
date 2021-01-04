@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Copyright (c) SUPPLiot GmbH.
+
+    This file is part of SUPPLiot GS1 SSCC Labels module
+    (see https://suppliot.eu).
+
+    See LICENSE file for full copyright and licensing details.
+-->
+<odoo noupdate="1">
+    <data>
+        <record id="suppl_delivery_gs1_label_compact_paperformat" model="report.paperformat">
+            <field name="name">GS1 Compact Label</field>
+            <field name="format">custom</field>
+            <field name="page_height">150</field>
+            <field name="page_width">102</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">1</field>
+            <field name="margin_bottom">1</field>
+            <field name="margin_left">1</field>
+            <field name="margin_right">4</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">0</field>
+            <field name="dpi">96</field>
+        </record>
+
+        <report
+                id="suppl_action_report_gs1_sscc_label_package"
+                string="GS1 Package Labels (PDF)"
+                model="stock.quant.package"
+                name="suppl_delivery_gs1_labels.gs1_label_package"
+                file="suppl_delivery_gs1_labels.gs1_label_package"
+                report_type="qweb-pdf"
+                print_report_name="'Package - %s' % object.name"
+                paperformat="suppl_delivery_gs1_label_compact_paperformat"
+        />
+
+        <report
+                id="suppl_action_report_gs1_sscc_label_picking"
+                string="GS1 Package Labels (PDF)"
+                model="stock.picking"
+                name="suppl_delivery_gs1_labels.gs1_label_picking"
+                file="suppl_delivery_gs1_labels.gs1_label_picking"
+                report_type="qweb-pdf"
+                print_report_name="'Package - %s' % object.name"
+                paperformat="suppl_delivery_gs1_label_compact_paperformat"
+        />
+    </data>
+</odoo>
