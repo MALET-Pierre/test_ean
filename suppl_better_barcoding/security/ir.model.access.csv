@@ -1,0 +1,10 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_stock_picking_type_step_description_all,stock.picking.type.step.description.all,model_stock_picking_type_step_description,,0,0,0,0
+access_stock_picking_type_step_description_portal,stock.picking.type.step.description.portal,model_stock_picking_type_step_description,base.group_portal,0,0,0,0
+access_stock_picking_type_step_description_user,stock.picking.type.step.description.user,model_stock_picking_type_step_description,base.group_user,1,1,0,0
+access_stock_picking_type_step_description_system,stock.picking.type.step.description.system,model_stock_picking_type_step_description,base.group_system,1,1,1,1
+access_ir_actions_report_to_picking_type_all,ir.actions.report.to.picking.type.all,model_ir_actions_report_to_picking_type,,0,0,0,0
+access_ir_actions_report_to_picking_type_portal,ir.actions.report.to.picking.type.portal,model_ir_actions_report_to_picking_type,base.group_portal,0,0,0,0
+access_ir_actions_report_to_picking_type_user,ir.actions.report.to.picking.type.user,model_ir_actions_report_to_picking_type,base.group_user,1,1,0,0
+access_ir_actions_report_to_picking_type_system,ir.actions.report.to.picking.type.system,model_ir_actions_report_to_picking_type,base.group_system,1,1,1,1
+access_warehouse_picking_order_public,stock.warehouse.product.handle.public,model_stock_warehouse_product_handle,base.group_user,1,1,1,1

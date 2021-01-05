@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Copyright (c) SUPPLiot GmbH.
+
+    This file is part of SUPPLiot Better Barcoding module
+    (see https://suppliot.eu).
+
+    See LICENSE file for full copyright and licensing details.
+-->
+<odoo>
+    <data>
+        <record id="suppl_bb_stock_inventory_line_tree2" model="ir.ui.view">
+            <field name="name">suppl.better.barcoding.stock.inventory.line.tree2</field>
+            <field name="model">stock.inventory.line</field>
+            <field name="inherit_id" ref="stock.stock_inventory_line_tree2"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='inventory_date']" position="attributes">
+                    <attribute name="optional">show</attribute>
+                </xpath>
+                <xpath expr="//field[@name='prod_lot_id']" position="after">
+                    <field name="use_date" groups="stock.group_production_lot" width="0.8" widget="date"
+                           attrs="{'readonly':
+                           ['|', '|', '|',
+                            ('product_tracking', '=', 'none'),
+                            ('is_editable', '=', False),
+                            ('state', '!=', 'confirm'),
+                            ('prod_lot_id', '=', False)
+                            ]}"
+                           optional="show"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Copyright (c) SUPPLiot GmbH.
+
+    This file is part of SUPPLiot Better Barcoding module
+    (see https://suppliot.eu).
+
+    See LICENSE file for full copyright and licensing details.
+-->
+<odoo>
+    <data>
+        <record id="suppl_bb_stock_warehouse_inherited_picking_order" model="ir.ui.view">
+            <field name="name">suppl.bb.stock.warehouse.form.inherited.picking_order</field>
+            <field name="model">stock.warehouse</field>
+            <field name="inherit_id" ref="stock.view_warehouse"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet/group" position="after">
+                    <group string="Picking Order">
+                        <field name="pickingProducts">
+                            <form>
+                                <field name="sequence" invisible="1"/>
+                            </form>
+                            <tree editable="bottom">
+                                <field name="sequence" widget="handle"/>
+                                <field name="product_id" options="{'no_open': True}" force_save="1"/>
+                            </tree>
+                        </field>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="suppl_bb_stock_warehouse_picking_order_products" model="ir.ui.view">
+            <field name="name">stock.bb.warehouse.picking.order.products.form</field>
+            <field name="model">stock.warehouse.product.handle</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="product_id"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

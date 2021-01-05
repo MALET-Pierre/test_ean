@@ -1,0 +1,52 @@
+- Easily scan more in less time and reduce errors.
+-- This module extends barcode app view to improve barcode and stock picking usability.
+
+--------------------------------------------------------
+* OVERVIEW                                             *
+--------------------------------------------------------
+- Extended Barcode App to improve barcode usability and minimize scan errors.
+- Improved error messages for more feedback, quick edit functionality, add or remove
+  scan entries.  Correct errors more easily.
+- Validate and print command: Automatically print pre-defined reports or labels immediately
+  after picking operation is finished.
+- Configure your operation types to customize barcode view, set automatic packaging options
+  and create user friendly instructions to print out.
+
+See static/description/index.html and open in Browser for an extended overview.
+
+--------------------------------------------------------
+* USAGE                                                *
+--------------------------------------------------------
+To configure this modules features navigate to Inventory > Configuration > Operation Types. The barcode, usability
+and packaging features can be customized per Operation Type.
+
+
+Packages
+--------------------------------------------------------
+(Only if packaging is enabled in Settings > Inventory > Delivery Packages)
+
+- Automatic packaging mode:
+    - Standard: The basic Odoo way
+    - Per Product: Pack the same products
+    - Per Variant: Pack the same product variants
+    - Per Charge: Pack the same lots or serial numbers
+
+- Packaging required:
+    - Force automatic packaging after validation of picking order.
+
+
+Barcode App Settings
+--------------------------------------------------------
+Use these settings to hide and display the buttons visible in barcode app.
+
+
+Validate and Print Reports/Labels
+--------------------------------------------------------
+Choose your reports to print automatically after picking process is validate via barcode app.
+
+
+Instructions
+--------------------------------------------------------
+Create a step-by-step pick and scan guide to print out for your employees.
+
+

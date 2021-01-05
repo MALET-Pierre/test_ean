@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Copyright (c) SUPPLiot GmbH.
+
+    This file is part of SUPPLiot Better Barcoding module
+    (see https://suppliot.eu).
+
+    See LICENSE file for full copyright and licensing details.
+-->
+<odoo>
+    <data>
+        <record id="suppl_bb_view_stock_move_line_detailed_operation_tree" model="ir.ui.view">
+            <field name="name">suppl.better.barcoding.stock.move.line.operations.tree</field>
+            <field name="model">stock.move.line</field>
+            <field name="inherit_id" ref="stock.view_stock_move_line_detailed_operation_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="attributes">
+                    <attribute name="decoration-success">
+                        False
+                    </attribute>
+                    <attribute name="decoration-info">
+                        qty_done == product_uom_qty and state != 'done' and not result_package_id
+                    </attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="suppl_bb_stock_picking_view_picking_form" model="ir.ui.view">
+            <field name="name">better.barcoding.stock.picking.form</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook//page[1]//button[@name='put_in_pack']" position="attributes">
+                    <attribute name="attrs">{'invisible': ['&amp;', ('immediate_transfer', '=', False), ('state', 'in', ('draft', 'done', 'cancel'))]}</attribute>
+                </xpath>
+
+                <xpath expr="//notebook//page[2]//button[@name='put_in_pack']" position="attributes">
+                    <attribute name="attrs">{'invisible': ['&amp;', ('immediate_transfer', '=', False), ('state', 'in', ('draft', 'done', 'cancel'))]}</attribute>
+                </xpath>
+
+                <xpath expr="//notebook//page[3]//button[@name='put_in_pack']" position="attributes">
+                    <attribute name="attrs">{'invisible': ['&amp;', ('immediate_transfer', '=', False), ('state', 'in', ('draft', 'done', 'cancel'))]}</attribute>
+                </xpath>
+
+                <xpath expr="//notebook//page[3]//field[@name='move_ids_without_package']/tree" position="attributes">
+                    <attribute name="decoration-danger">
+                        state != 'done' and product_uom_qty != reserved_availability
+                    </attribute>
+                    <attribute name="decoration-warning">
+                        not parent.immediate_transfer and state != 'done' and (quantity_done > reserved_availability or quantity_done > product_uom_qty) and show_reserved_availability
+                    </attribute>
+                    <attribute name="decoration-info">
+                        quantity_done == product_uom_qty
+                    </attribute>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

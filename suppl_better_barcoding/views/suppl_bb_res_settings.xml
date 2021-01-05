@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Copyright (c) SUPPLiot GmbH.
+
+    This file is part of SUPPLiot Better Barcoding module
+    (see https://suppliot.eu).
+
+    See LICENSE file for full copyright and licensing details.
+-->
+<odoo>
+    <data>
+        <record id="suppl_res_settings_base_setup" model="ir.ui.view">
+            <field name="name">suppl.res.settings.base.setup</field>
+            <field name="model">res.config.settings</field>
+            <field name="priority" eval="99"/>
+            <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@id='warning_info']" position="before">
+                    <div class="col-12 col-lg-6 o_setting_box" id="suppl_group_picking_slip_unavailable">
+                        <div class="o_setting_left_pane">
+                            <field name="group_picking_slip_unavailable"/>
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <label for="group_picking_slip_unavailable"/>
+                        </div>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,98 @@
+/********************************************************************
+*    Copyright (c) SUPPLiot GmbH.
+*
+*    This file is part of SUPPLiot Better Barcoding module
+*    (see https://suppliot.eu).
+*
+*    See LICENSE file for full copyright and licensing details.
+*
+********************************************************************/
+
+.o_barcode_header {
+  &.navbar {
+    padding: 0.2rem 1rem !important;
+  }
+}
+
+.o_barcode_client_action {
+
+  // Top Block
+  // =====================================
+  .o_barcode_message {
+    min-height: 80px;
+
+    .o_barcode_pic {
+      width: 12%;
+    }
+  }
+
+
+  // Lines Block
+  // =====================================
+  .o_barcode_lines {
+    .o_barcode_line {
+      .pb-1 {
+        padding-bottom: 0 !important;
+      }
+
+      &.list-group-item {
+        padding: 0.35rem 0.65rem !important;
+      }
+
+      .o_barcode_line_title, .o_line_scan_error_msg_wrapper {
+        white-space: nowrap;
+      }
+
+      .o_edit {
+        padding: 10px 15px;
+        color: white !important;
+        border-radius: 7px;
+        margin-right: 5px;
+        background-color: #696969;
+        position: absolute;
+        right: 5px;
+      }
+
+      .suppl_bb_qty {
+        padding: 10px 15px;
+        color: white;
+        border-radius: 7px;
+        margin-right: 10px;
+      }
+    }
+
+    &.o_js_has_highlight .o_barcode_line.o_highlight {
+      &.o_highlight_warning {
+        background-color: rgba(theme-color('warning'), 0.15);
+        border-color: theme-color('warning');
+      }
+
+      &.o_highlight_info {
+        background-color: rgba(theme-color('info'), 0.15);
+        border-color: theme-color('info');
+      }
+
+      &.o_highlight_green {
+        background-color: rgba(theme-color('success'), 0.15);
+        border-color: theme-color('success');
+      }
+
+      &.o_highlight_red {
+        background-color: rgba(theme-color('danger'), 0.15);
+        border-color: theme-color('danger');
+      }
+    }
+  }
+
+  .suppl_bb_stock_move_line_edit {
+    .o_field_cell, .o_list_record_remove {
+      padding: 1.2rem 0.5rem;
+      font-size: 1.7rem;
+    }
+
+    .o_field_widget {
+      font-size: 1.7rem !important;
+    }
+  }
+
+}

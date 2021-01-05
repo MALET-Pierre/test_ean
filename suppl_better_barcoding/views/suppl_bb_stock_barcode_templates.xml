@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Copyright (c) SUPPLiot GmbH.
+
+    This file is part of SUPPLiot Better Barcoding module
+    (see https://suppliot.eu).
+
+    See LICENSE file for full copyright and licensing details.
+-->
+<odoo>
+    <data>
+
+        <template id="suppl_bb_assets_backend" name="suppl_bb_assets_backend"
+                  inherit_id="web.assets_backend">
+            <xpath expr="//script[1]" position="before">
+                <script type="text/javascript"
+                        src="/suppl_better_barcoding/static/src/js/client_action/suppl_bb_lines_widget.js"></script>
+                <script type="text/javascript"
+                        src="/suppl_better_barcoding/static/src/js/client_action/suppl_bb_abstract_client_action.js"></script>
+            </xpath>
+
+            <xpath expr="//link[last()]" position="after">
+                <link rel="stylesheet" type="text/scss"
+                      href="/suppl_better_barcoding/static/src/scss/suppl_bb_client_action.scss"/>
+            </xpath>
+        </template>
+
+        <record id="suppl_bb_view_picking_operation_type_view_instructions" model="ir.ui.view">
+            <field name="name">Operation Types</field>
+            <field name="model">stock.picking.type</field>
+            <field name="inherit_id" ref="stock.view_picking_type_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='show_entire_packs']" position="before">
+                    <field name="automatic_packaging_mode" widget="selection"/>
+                    <field name="packaging_required"/>
+                </xpath>
+
+                <xpath expr="//sheet[last()]" position="inside">
+                    <notebook>
+                        <page string="Barcode App Settings" name="barcoding_settings"
+                              attrs='{"invisible": [("code", "==", "mrp_operation")]}'>
+                            <group>
+                                <div>
+                                    <label for="barcode_show_add_product_btn" string="Show 'add product' button" />
+                                    <field name="barcode_show_add_product_btn"/>
+                                </div>
+
+                                <div>
+                                    <label for="barcode_show_packaging_btn" string="Show 'packaging' button" />
+                                    <field name="barcode_show_packaging_btn"/>
+                                </div>
+
+                                <div>
+                                    <label for="barcode_show_previous_next_btn" string="Show 'previous/next' button" />
+                                    <field name="barcode_show_previous_next_btn"/>
+                                </div>
+
+                                <div>
+                                    <label for="barcode_show_validate_btn" string="Show 'validate' button" />
+                                    <field name="barcode_show_validate_btn"/>
+                                </div>
+
+                                <div>
+                                    <label for="barcode_show_validateprint_btn" string="Show 'print and validate' button" />
+                                    <field name="barcode_show_validateprint_btn"/>
+                                </div>
+                            </group>
+                        </page>
+
+                        <page string="Validate and Print Reports/Labels" name="reports"
+                              attrs='{"invisible": [("code", "==", "mrp_operation")]}'>
+                            <field name="validate_and_print_report_ids" widget="one2many"
+                                   options="{'no_open': False, 'no_create': True, 'no_quick_create': True}">
+                                <tree string="Report xml" editable="bottom">
+                                    <field name="validate_and_print_picking_type_duplicates" readonly="False"
+                                           force_save="1"/>
+                                    <field name="action_report_id" domain="[('model', '=', 'stock.picking')]"
+                                           readonly="False" force_save="1"/>
+                                    <!--<field name="name" readonly="True"/>
+                                    <field name="report_type" readonly="True"/>
+                                    <field name="model" readonly="True"/>-->
+                                </tree>
+                            </field>
+                        </page>
+
+                        <page string="Instructions" name="instructions"
+                              attrs='{"invisible": [("code", "==", "mrp_operation")]}'>
+                            <group>
+                                <field name="user_friendly_name"/>
+                                <field name="user_friendly_notes"/>
+                            </group>
+
+                            <group>
+                                <field name="user_friendly_description"/>
+                            </group>
+
+                            <field name="user_friendly_steps">
+                                <form>
+                                    <field name="sequence" invisible="1"/>
+                                </form>
+                                <tree editable="bottom">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="step_short_description" options="{'no_open': True}" force_save="1"/>
+                                    <field name="step_description_details" options="{'no_open': True}" force_save="1"/>
+                                    <field name="step_show_barcode" options="{'no_open': True}" force_save="1"/>
+                                    <field name="step_show_custom_barcode" options="{'no_open': True}" force_save="1"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </xpath>
+            </field>
+        </record>
+
+
+        <record id="suppl_bb_stock_move_line_edit" model="ir.ui.view">
+            <field name="name">stock.product.selector</field>
+            <field name="model">stock.picking</field>
+            <field name="priority">1000</field>
+            <field name="arch" type="xml">
+                <form string="Select a Product" class="suppl_bb_stock_move_line_edit">
+                    <field name="id" invisible="1"/>
+                    <field name="location_id" invisible="1"/>
+                    <field name="location_dest_id" invisible="1"/>
+                    <field name="company_id" invisible="1"/>
+                    <field name="is_locked" invisible="1"/>
+                    <field name="state" invisible="1"/>
+
+                    <field name="move_line_ids_for_context_product_name" nolabel="1" readonly="1"/>
+
+                    <field name="move_line_ids_for_context" nolabel="1"
+                           context="{'default_picking_id': id, 'default_location_id': location_id, 'default_location_dest_id': location_dest_id, 'default_company_id': company_id}">
+                        <tree editable="bottom" options="{'no_open': True}" multi_edit="1">
+                            <field name="state" invisible="1"/>
+                            <field name="company_id" invisible="1"/>
+                            <field name="move_id" invisible="1"/>
+                            <field name="picking_id" invisible="1"/>
+                            <field name="location_id" invisible="1" groups="stock.group_stock_multi_locations"/>
+                            <field name="location_dest_id" invisible="1"/>
+                            <field name="package_id" invisible="1" groups="stock.group_tracking_lot"/>
+                            <field name="result_package_id" invisible="1" groups="stock.group_tracking_lot"/>
+                            <field name="lots_visible" invisible="1"/>
+                            <field name="owner_id" invisible="1" groups="stock.group_tracking_owner"/>
+                            <field name="is_initial_demand_editable" invisible="1"/>
+                            <field name="product_uom_qty" invisible="1" readonly="1"/>
+                            <field name="is_locked" invisible="1"/>
+                            <field name="product_uom_id" invisible="1"/>
+                            <field name="product_id" required="1" readonly="1" invisible="1"/>
+
+                            <field name="lot_id"
+                                   groups="stock.group_production_lot"
+                                   force_save="1" options="{'no_open': True}"
+                                   attrs="{'invisible': [('lots_visible', '=', False)]}"
+                                   context="{'default_product_id': product_id, 'default_company_id': company_id, 'active_picking_id': picking_id}"/>
+                            <field name="qty_done"
+                                   force_save="1" options="{'no_open': True}"
+                                   attrs="{'readonly': [('state', 'in', ('done', 'cancel')), ('is_locked', '=', True)]}"
+                            />
+                        </tree>
+                    </field>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>
