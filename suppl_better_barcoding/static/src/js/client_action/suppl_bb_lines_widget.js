@@ -129,8 +129,8 @@ odoo.define('suppl_better_barcoding.LinesWidget', ['web.core', 'web.Dialog', 'st
 
             // product not ordered --> return warning
             if (this.demand_by_products && !(line.product_id.id in this.demand_by_products)) {
-                this._setErrorMsgUi($line, _t('Warning: Product is not ordered.'));
-                return -1;
+                this._setErrorMsgUi($line, _t('Warning: Product is not ordered(test pma).'));
+                return -2;
             }
 
             let current_qty = parseInt(qties[0], 10);
