@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Copyright (c) SUPPLiot GmbH.
+
+    This file is part of SUPPLiot GS1 SSCC Labels module
+    (see https://suppliot.eu).
+
+    See LICENSE file for full copyright and licensing details.
+-->
+<odoo>
+    <data>
+        <record id="s_product_packaging_form_view_barcode_button" model="ir.ui.view">
+            <field name="name">product.packaging.form.view.barcode.button</field>
+            <field name="model">product.packaging</field>
+            <field name="inherit_id" ref="product.product_packaging_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='barcode']" position="after">
+                    <button name="create_barcode_number"
+                            string="Generate GTIN" type="object"
+                            class="oe_edit_only btn-secondary"></button>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
