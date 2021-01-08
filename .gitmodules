@@ -16,3 +16,8 @@
 	path = OCA/server-tools
 	url = git@github.com:OCA/server-tools.git
 	branch = 13.0
+
+[submodule "OCA/rest-framework"]
+	path = OCA/rest-framework
+	url = git@github.com:OCA/rest-framework.git
+	branch = 13.0
