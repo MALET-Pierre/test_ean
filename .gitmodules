@@ -1,3 +1,8 @@
 [submodule "wms"]
 	path = wms
 	url = git@github.com:OCA/wms.git
+
+[submodule "OCA/stock-logistics-warehouse"]
+	path = OCA/stock-logistics-warehouse
+	url = git@github.com:OCA/stock-logistics-warehouse.git
+	branch = 13.0
